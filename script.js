@@ -104,6 +104,8 @@ function checkGraph() {
 		}
 	}
 
+	draw();
+
 	if (totalResult) {
 		alert("The graph is bipartite!");
 	} else {
