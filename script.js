@@ -105,31 +105,44 @@ function checkGraph() {
 	}
 
 	var leftColCounter = 1;
-	var midColCounter = 1;
 	var rightColCounter = 1;
 
 	for (var i = 0; i < bipartiteIDs.length; i++) {
 		var id = bipartiteIDs[i];
 		if (id == 1) {
-			nodeXPosList[i] = 100;
+			nodeXPosList[i] = 100 + (leftColCounter % 2 == 0 ? 25 : 0);
 			nodeYPosList[i] = 50 * leftColCounter;
 			leftColCounter++;
 		} else if (id == 2) {
-			nodeXPosList[i] = 400;
+			nodeXPosList[i] = 400 - (rightColCounter % 2 == 0 ? 25 : 0);
 			nodeYPosList[i] = 50 * rightColCounter;
 			rightColCounter++;
 		} else {
-			nodeYPosList[i] = 250;
-			nodeYPosList[i] = 50 * midColCounter;
-			midColCounter++;
+			if (leftColCounter < rightColCounter) {
+				nodeXPosList[i] = 100 + (leftColCounter % 2 == 0 ? 25 : 0);
+				nodeYPosList[i] = 50 * leftColCounter;
+				leftColCounter++;
+			} else {
+				nodeXPosList[i] = 400 - (rightColCounter % 2 == 0 ? 25 : 0);
+				nodeYPosList[i] = 50 * rightColCounter;
+				rightColCounter++;
+			}
 		}
 	}
 
 	if (totalResult) {
-		setTimeout(alert("The graph is bipartite!"), 500);
+		setTimeout(isBipartite, 50);
 	} else {
-		setTimeout(alert("The graph is NOT bipartite!"), 500);
+		setTimeout(isNotBipartite, 50);
 	}
+}
+
+function isBipartite() {
+	alert("The graph is bipartite!");
+}
+
+function isNotBipartite() {
+	alert("The graph is NOT bipartite!");
 }
 
 function assignIDsToConnectedNodes(nodeIndex) {
