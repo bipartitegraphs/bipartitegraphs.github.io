@@ -104,12 +104,31 @@ function checkGraph() {
 		}
 	}
 
-	draw();
+	var leftColCounter = 1;
+	var midColCounter = 1;
+	var rightColCounter = 1;
+
+	for (var i = 0; i < bipartiteIDs.length; i++) {
+		var id = bipartiteIDs[i];
+		if (id == 1) {
+			nodeXPosList[i] = 100;
+			nodeYPosList[i] = 50 * leftColCounter;
+			leftColCounter++;
+		} else if (id == 2) {
+			nodeXPosList[i] = 400;
+			nodeYPosList[i] = 50 * rightColCounter;
+			rightColCounter++;
+		} else {
+			nodeYPosList[i] = 250;
+			nodeYPosList[i] = 50 * midColCounter;
+			midColCounter++;
+		}
+	}
 
 	if (totalResult) {
-		alert("The graph is bipartite!");
+		setTimeout(alert("The graph is bipartite!"), 500);
 	} else {
-		alert("The graph is NOT bipartite!");
+		setTimeout(alert("The graph is NOT bipartite!"), 500);
 	}
 }
 
